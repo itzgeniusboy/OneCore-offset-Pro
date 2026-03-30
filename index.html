@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>OneCore Offset Pro - .SO String & Offset Extractor</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="description" content="Extract strings and offsets from .so files with AI-powered analysis">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔧 OneCore Offset Pro</h1>
+            <p>.SO File String & Offset Extractor | AI-Powered Analysis</p>
+        </header>
+
+        <div class="upload-section">
+            <div class="upload-area" id="dropZone">
+                <div class="upload-icon">📁</div>
+                <p>Drag & drop .so file here or click to select</p>
+                <p class="file-hint">Supported: ARM, ARM64, x86, x64 | Max: 400 MB</p>
+                <input type="file" id="fileInput" accept=".so" style="display: none">
+                <button class="browse-btn" onclick="document.getElementById('fileInput').click()">Browse Files</button>
+            </div>
+            
+            <div id="progressContainer" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-info">
+                    <span id="progressPercent">0%</span>
+                    <span id="progressSpeed"></span>
+                    <span id="progressTime"></span>
+                </div>
+                <div class="progress-controls">
+                    <button id="pauseBtn">⏸️ Pause</button>
+                    <button id="resumeBtn" style="display: none;">▶️ Resume</button>
+                    <button id="cancelBtn">❌ Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="search-area">
+                <input type="text" id="searchInput" placeholder="🔍 Search strings... (e.g., skin, gun, report)">
+                <button id="voiceBtn" class="voice-btn">🎤</button>
+            </div>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="string">Strings</button>
+                <button class="filter-btn" data-filter="function">Functions</button>
+                <button class="filter-btn" data-filter="struct">Structures</button>
+            </div>
+        </div>
+
+        <div class="stats-bar" id="statsBar" style="display: none;">
+            <span>📊 Total: <strong id="totalCount">0</strong></span>
+            <span>🔤 Strings: <strong id="stringCount">0</strong></span>
+            <span>⚙️ Functions: <strong id="funcCount">0</strong></span>
+            <span>📦 Structures: <strong id="structCount">0</strong></span>
+        </div>
+
+        <div class="results-container">
+            <div class="results-header">
+                <div class="col-offset">Offset</div>
+                <div class="col-type">Type</div>
+                <div class="col-value">Value / Name</div>
+                <div class="col-action">Action</div>
+            </div>
+            <div id="resultsList" class="results-list">
+                <div class="empty-state">
+                    <div class="empty-icon">📂</div>
+                    <p>Load a .so file to see strings and offsets</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-bar">
+            <button id="exportBtn" class="export-btn" disabled>📤 Export</button>
+            <button id="bookmarkBtn" class="bookmark-btn" disabled>⭐ Bookmarks</button>
+            <button id="themeToggle" class="theme-btn">🌙 Dark Mode</button>
+        </div>
+    </div>
+
+    <div id="offsetModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>📍 Offset Details</h3>
+            <div id="modalDetails"></div>
+            <button id="copyModalBtn" class="copy-btn">📋 Copy Offset</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="elf-parser.js"></script>
+    <script src="string-extractor.js"></script>
+    <script src="offset-finder.js"></script>
+    <script src="ai-detector.js"></script>
+    <script src="level-detector.js"></script>
+    <script src="export.js"></script>
+</body>
+</html>
